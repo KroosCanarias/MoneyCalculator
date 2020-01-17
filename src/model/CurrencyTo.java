@@ -1,5 +1,5 @@
 
-package moneycalculator;
+package model;
 
 public class CurrencyTo implements Currency{
     private String cur;

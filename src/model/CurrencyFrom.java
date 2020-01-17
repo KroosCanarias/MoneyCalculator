@@ -1,4 +1,4 @@
-package moneycalculator;
+package model;
 
 public class CurrencyFrom implements Currency{
     private String cur;
