@@ -20,7 +20,8 @@ public class MoneyCalculator {
     public void process() throws IOException {
         exchangerate = GetExchangeRate.getExchangeRate(currencyFrom,currencyTo);
     }
-    public double getMoney(){
+    public double getMoney() throws IOException{
+        process();
         return exchangerate*amount;
     }
 }

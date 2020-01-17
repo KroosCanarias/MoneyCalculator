@@ -76,7 +76,18 @@ public class GUI extends JFrame{
         combo.addItem("GBP");
         combo.addItem("CAD");
     }
-    
+    public double getAmount(){
+        return Double.parseDouble(amount.getText());
+    }
+    public String getFrom(){
+        return comboFrom.getSelectedItem().toString();
+    }
+    public String getTo(){
+        return comboTo.getSelectedItem().toString();
+    }
+    public void setRes(String res){
+        result.setText(res);
+    }
     public static void main(String [] args){
         new GUI();
     }
