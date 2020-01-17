@@ -8,42 +8,19 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class MoneyCalculator { 
-    double moneyFrom;
-    double to;
-    public static void main(String[] args) throws IOException {
-        MoneyCalculator moneycalculator = new MoneyCalculator();
-        moneycalculator.control();
+    double amount;
+    double exchangerate;
+    Currency currencyFrom;
+    Currency currencyTo;
+    public MoneyCalculator(Currency currencyFrom, Currency currencyTo,double amount){
+        this.currencyFrom=currencyFrom;
+        this.currencyTo=currencyTo;
+        this.amount=amount;
     }
-
-    private static double getExchangeRate(String from, String to) throws IOException {
-        URL url = 
-            new URL("http://free.currencyconverterapi.com/api/v5/convert?q=" +
-                    from + "_" + to + "&compact=y");
-        URLConnection connection = url.openConnection();
-        try (BufferedReader reader = 
-                new BufferedReader(
-                        new InputStreamReader(connection.getInputStream()))) {
-            String line = reader.readLine();
-            String line1 = line.substring(line.indexOf(to)+12, line.indexOf("}"));
-            return Double.parseDouble(line1);
-        }
+    public void process() throws IOException {
+        exchangerate = GetExchangeRate.getExchangeRate(currencyFrom,currencyTo);
     }
-
-    private void control() throws IOException {
-        input();
-        process();
-        output();
+    public double getMoney(){
+        return exchangerate*amount;
     }
-
-    private void input() {
-        System.out.println("Introduce una cantidad de dólares: ");
-        Scanner scanner = new Scanner(System.in);
-        moneyFrom = scanner.nextDouble();
-    }
-    private void process() throws IOException {
-        to = getExchangeRate("USD","EUR");
-    }
-    private void output() {
-        System.out.println(moneyFrom + " $ = " + moneyFrom*to + " €");
-    }    
 }
