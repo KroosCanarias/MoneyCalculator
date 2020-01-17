@@ -1,6 +1,10 @@
 package view;
+import Controller.ControlClass;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 public class GUI extends JFrame{
     private JTextField amount, result;
@@ -8,6 +12,7 @@ public class GUI extends JFrame{
     private JLabel money, labelFrom,labelTo,labelRes;
     private Container container;
     private JPanel groupComb,groupAmRes;
+    private JButton boton;
     public GUI(){
         container=getContentPane();
         initGroupComb();
@@ -15,6 +20,7 @@ public class GUI extends JFrame{
         initComboTo();
         groupAmRes();
         initMoney();
+        initButton();
         initRes();
         setLocation(100,50);
         setSize(500,200);
@@ -39,6 +45,25 @@ public class GUI extends JFrame{
         panel.add(money);
         panel.add(amount);
         groupAmRes.add(panel);
+    }
+    private void initButton(){
+        boton=new JButton("Evaluar");
+        boton.setAlignmentX(CENTER_ALIGNMENT);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                if(!amount.getText().equals("")){
+                    ControlClass cr=new ControlClass();
+                    try {
+                        cr.execute();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            }
+        });
+
+        groupAmRes.add(boton);
     }
     private void groupAmRes(){
         groupAmRes=new JPanel();
@@ -88,7 +113,5 @@ public class GUI extends JFrame{
     public void setRes(String res){
         result.setText(res);
     }
-    public static void main(String [] args){
-        new GUI();
-    }
+    
 }
