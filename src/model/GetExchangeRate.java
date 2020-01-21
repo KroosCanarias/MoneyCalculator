@@ -18,7 +18,8 @@ public class GetExchangeRate {
                 new BufferedReader(
                         new InputStreamReader(connection.getInputStream()))) {
             String line = reader.readLine();
-            String line1 = line.substring(line.indexOf(to.getCurrency())+12, line.indexOf("}"));
+            String line1 = line.substring(line.indexOf(to.getCurrency())+12
+                    , line.indexOf("}"));
             return Double.parseDouble(line1);
         }
     }
