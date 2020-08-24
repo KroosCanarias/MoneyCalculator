@@ -15,6 +15,7 @@ public class ControlClass {
             from.setCurrency(gui.getFrom());
             to.setCurrency(gui.getTo());
             amount=gui.getAmount();
+           
         }catch(NullPointerException e){
             
         }
